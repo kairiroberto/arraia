@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>ARRAIA</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+        <link href="../../materialize/css/materialize.css" rel="stylesheet" type="text/css"/>
+        <link href="../../materialize/css/materialize.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/usuario.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+
+        <div class="cabeca1">
+            <span class="cabeca2">
+                Usuário
+            </span>
+        </div>
+
+        </br>
+
+        <div class="formulario">
+            E-mail
+            <input class="input-field" type="email" id="email" /><br>
+            Telefone
+            <input class="input-field" type="tel" id="telefone" /><br>
+            Nome (Nome completo)
+            <input class="input-field" type="text" id="nome" /><br>
+            CPF (apenas números)
+            <input class="input-field" type="number" id="cpf" /><br>
+            Data de nascimento
+            <input class="input-field" type="date" id="nascimento" /><br>
+            Endereço
+            <input class="input-field" type="text" id="endereco" /><br>
+            Cidade/RN
+            <input class="input-field" type="text" id="cidade" /><br>
+        </div>
+        
+        <button class="waves-effect waves-light btn" onclick="add()">Salvar</button>
+        
+        <a href="../../index.html" class="waves-effect waves-light red btn">Voltar</a>
+
+        <script src="../../materialize/js/materialize.js" type="text/javascript"></script>
+        <script src="../../materialize/js/materialize.min.js" type="text/javascript"></script>
+        <script src="../../js/usuario.js" type="text/javascript"></script>
+
+    </body>
+</html>
