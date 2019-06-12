@@ -4,20 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="com.arraiax.kairi.arraiax.MainActivity">
 
-    <FrameLayout
+    <Button
+        android:id="@+id/btWebUsuario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="10dp"
+        android:background="#ff6000"
+        android:gravity="center"
+        android:text="Acessar como Usuário\n(Responsável)"
+        android:textColor="#ffffff" />
 
-        <WebView
-            android:id="@+id/wvPrincipal"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <Button
+        android:id="@+id/btWebProfessor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="10dp"
+        android:background="#ff4000"
+        android:gravity="center"
+        android:text="Acessar como Professor"
+        android:textColor="#ffffff" />
 
-
-    </FrameLayout>
+    <Button
+        android:id="@+id/btWebFilho"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:text="Configurar Filho"
+        android:textColor="#ffffff" />
 
 </LinearLayout>
