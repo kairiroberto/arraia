@@ -19,44 +19,41 @@ and open the template in the editor.
         <script>
             function save() {
                 var firebaseConfig = {
-                    apiKey: "AIzaSyDyw6S4YRYPPRmLiL6DKvHtZnDrqUlzwAU",
-                    authDomain: "arraia-ea992.firebaseapp.com",
-                    databaseURL: "https://arraia-ea992.firebaseio.com",
-                    projectId: "arraia-ea992",
-                    storageBucket: "arraia-ea992.appspot.com",
-                    messagingSenderId: "212604244048",
-                    appId: "1:212604244048:web:b4f33e67ee59faf4"
+                apiKey: "AIzaSyDyw6S4YRYPPRmLiL6DKvHtZnDrqUlzwAU",
+                authDomain: "arraia-ea992.firebaseapp.com",
+                databaseURL: "https://arraia-ea992.firebaseio.com",
+                projectId: "arraia-ea992",
+                storageBucket: "arraia-ea992.appspot.com",
+                messagingSenderId: "212604244048",
+                appId: "1:212604244048:web:b4f33e67ee59faf4"
                 };
                 // Initialize Firebase
                 firebase.initializeApp(firebaseConfig);
                 var codigo = Android.getImei();
-                if (codigo == null || codigo == "") {
-                    codigo = firebase.database().ref().child('usuario').push().key;
-                    Android.setImei(codigo);
-                }
+                var imei = document.getElementById("imei").value;
                 var nome = document.getElementById("nome").value;
+                var matricula = document.getElementById("matricula").value;
+                var escola = document.getElementById("escola").value;
+                var serieTurma = document.getElementById("serieTurma").value;
+                var sala = document.getElementById("sala").value;
                 var cpf = document.getElementById("cpf").value;
                 var nascimento = document.getElementById("nascimento").value;
-                var email = document.getElementById("email").value;
-                var telefone = document.getElementById("telefone").value;
-                var endereco = document.getElementById("endereco").value;
-                var cidade = document.getElementById("cidade").value;
-                var usuario = {
-                    imei: codigo,
+                var filho = {
+                    imeip: codigo,
+                    imeif: imei,
                     nome: nome,
                     cpf: cpf,
                     nascimento: nascimento,
-                    email: email,
-                    telefone: telefone,
-                    endereco: endereco,
-                    cidade: cidade
+                    matricula: matricula,
+                    escola: escola,
+                    serieTurma: serieTurma,
+                    sala: sala,
                 };
 
-                firebase.database().ref('usuario/' + codigo).set(usuario)
+                firebase.database().ref('usuario/' + codigo + '/filho/' + imei).set(filho)
                         .then(function () {
-                            Android.showToast(JSON.stringify(usuario));
-                            Android.saveUsuario(JSON.stringify(usuario));
-                            window.location.href = "view.html";
+                            Android.showToast(JSON.stringify(filho));
+                            window.location.href = "../usuario/view.html";
                         }).catch(function (error) {
                             var errorCode = error.code;
                             var errorMessage = error.message;
@@ -70,32 +67,34 @@ and open the template in the editor.
 
         <div class="cabeca1">
             <span class="cabeca2">
-                Usuário - Salvar
+                Filho - Salvar
             </span>
         </div>
 
         </br>
 
         <div class="formulario">
+            Imei do filho
+            <input class="input-field" type="text" id="imei" /><br>
             Nome (Nome completo)
             <input class="input-field" type="text" id="nome" /><br>
+            Matricula
+            <input class="input-field" type="text" id="matricula" /><br>
+            Escola
+            <input class="input-field" type="text" id="escola" /><br>
+            Série/Turma
+            <input class="input-field" type="text" id="serieTurma" /><br>
+            Sala
+            <input class="input-field" type="text" id="sala" /><br>
             CPF (apenas números)
             <input class="input-field" type="number" id="cpf" /><br>
             Data de nascimento
             <input class="input-field" type="date" id="nascimento"/><br>
-            E-mail
-            <input class="input-field" type="email" id="email" /><br>
-            Telefone
-            <input class="input-field" type="tel" id="telefone" /><br>
-            Endereço
-            <input class="input-field" type="text" id="endereco" /><br>
-            Cidade/RN
-            <input class="input-field" type="text" id="cidade" /><br>
         </div>
 
         <button class="waves-effect waves-light btn" onclick="save()">Salvar</button>
 
-        <a href="view.html" class="waves-effect waves-light blue btn">Visualizar</a>
+        <a href="../usuario/view.html" class="waves-effect waves-light blue btn">Visualizar</a>
         
         <a href="../../index.html" class="waves-effect waves-light red btn">Início</a>
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>ARRAIA</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+        <link href="../../materialize/css/materialize.css" rel="stylesheet" type="text/css"/>
+        <link href="../../materialize/css/materialize.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/usuario.css" rel="stylesheet" type="text/css"/>
+        <script src="../../js/usuario.js" type="text/javascript"></script>
+        <script>
+            function getUsuario() {
+                var usuario = JSON.parse(Android.getUsuario());
+                document.getElementById("visualizacao").innerHTML =
+                    "</br>Código: " + usuario.imei +     
+                    "</br>Nome: " + usuario.nome + 
+                    "</br>CPF: " + usuario.cpf +
+                    "</br>Nascimento: " + usuario.nascimento +
+                    "</br>E-mail: " + usuario.email +
+                    "</br>Telefone: " + usuario.telefone + 
+                    "</br>Endereço: " + usuario.endereco +
+                    "</br>Cidade: " + usuario.cidade;
+                document.getElementById("visualizacao").innerHTML += "<h5>Filhos</h5>" + "<ul>";
+                for(i in usuario.filho) {
+                    document.getElementById("visualizacao").innerHTML += 'Código: ' + i + ': <ul>';
+                    document.getElementById("visualizacao").innerHTML += '<li>Nome: ' + usuario.filho[i].nome + '</li>';
+                    document.getElementById("visualizacao").innerHTML += '<li>Data de nascimento:' + usuario.filho[i].nascimento + '</li>';
+                    document.getElementById("visualizacao").innerHTML += '<li>Escola: ' + usuario.filho[i].escola + '</li>';
+                    document.getElementById("visualizacao").innerHTML += '<li>Sala: ' + usuario.filho[i].sala + '</li>';
+                    document.getElementById("visualizacao").innerHTML += '<li>Série/Turma: ' + usuario.filho[i].serieTurma + '</li>';
+                    document.getElementById("visualizacao").innerHTML += '</ul><br>';
+                }
+                document.getElementById("visualizacao").innerHTML += "</ul>";
+            }
+        </script>
+    </head>
+
+    <body onload="getUsuario()">
+
+        <div class="cabeca1">
+            <span class="cabeca2">
+                Usuário - Visualização
+            </span>
+        </div>
+
+        </br>
+
+        <div class="formulario" id="visualizacao">
+        </div>
+
+        <a href="../../index.html" class="waves-effect waves-light red btn">Início</a>
+
+        <script src="../../materialize/js/materialize.js" type="text/javascript"></script>
+        <script src="../../materialize/js/materialize.min.js" type="text/javascript"></script>
+
+    </body>
+    
+</html>
