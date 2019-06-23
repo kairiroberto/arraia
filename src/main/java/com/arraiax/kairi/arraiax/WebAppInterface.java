@@ -90,15 +90,18 @@ public class WebAppInterface {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("FILHO", filho);
             editor.commit();
+            HorarioSQlite qlite = new HorarioSQlite(mContext);
             List<Horario> horarios = new ArrayList<Horario>();
             JSONObject jsonObject = new JSONObject(filho);
             String sObject = String.valueOf(jsonObject.get("horario"));
             JSONObject partsData = new JSONObject(sObject);
             Iterator<String> key = partsData.keys();
             while (key.hasNext()) {
-                JSONObject object = partsData.getJSONObject(key.next());
+                String sKey = key.next();
+                JSONObject object = partsData.getJSONObject(sKey);
                 Horario h = new Horario();
 
+                h.setIdKey(sKey);
                 h.setDescricao(object.getString("descricao"));
                 h.setEscola(object.getString("escola"));
                 h.setHorariofin(object.getString("horariofin"));
@@ -108,9 +111,11 @@ public class WebAppInterface {
                 h.setSala(object.getString("sala"));
 
                 horarios.add(h);
+
+                qlite.save(h);
             }
             //Toast.makeText(mContext, "Dados salvo com sucesso.", Toast.LENGTH_SHORT).show();
-            return "Quantidade de horários: " + horarios.size();
+            return "Quantidade de horários: " + qlite.countId(horarios.get(0));
         } catch (Exception e) {
             Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
             return e.toString();

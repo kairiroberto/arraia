@@ -4,7 +4,8 @@ import java.sql.Time;
 
 public class Horario {
 
-    private String id;
+    private int idHorario;
+    private String idKey;
     private String descricao;
     private String escola;
     private String horariofin;
@@ -13,12 +14,20 @@ public class Horario {
     private Double longitude;
     private String sala;
 
-    public String getId() {
-        return id;
+    public int getIdHorario() {
+        return idHorario;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdHorario(int idHorario) {
+        this.idHorario = idHorario;
+    }
+
+    public String getIdKey() {
+        return idKey;
+    }
+
+    public void setIdKey(String idKey) {
+        this.idKey = idKey;
     }
 
     public String getDescricao() {
