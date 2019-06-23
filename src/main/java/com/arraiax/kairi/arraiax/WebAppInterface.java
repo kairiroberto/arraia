@@ -1,6 +1,7 @@
 package com.arraiax.kairi.arraiax;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -11,11 +12,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
 import java.lang.reflect.Type;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class WebAppInterface {
 
@@ -78,15 +84,36 @@ public class WebAppInterface {
     }
 
     @JavascriptInterface
-    public void saveFilho(String filho) {
+    public String saveFilho(String filho) {
         try {
             SharedPreferences sharedPreferences = mContext.getSharedPreferences("ARRAIA", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("FILHO", filho);
             editor.commit();
-            Toast.makeText(mContext, "Dados salvo com sucesso.", Toast.LENGTH_SHORT).show();
+            List<Horario> horarios = new ArrayList<Horario>();
+            JSONObject jsonObject = new JSONObject(filho);
+            String sObject = String.valueOf(jsonObject.get("horario"));
+            JSONObject partsData = new JSONObject(sObject);
+            Iterator<String> key = partsData.keys();
+            while (key.hasNext()) {
+                JSONObject object = partsData.getJSONObject(key.next());
+                Horario h = new Horario();
+
+                h.setDescricao(object.getString("descricao"));
+                h.setEscola(object.getString("escola"));
+                h.setHorariofin(object.getString("horariofin"));
+                h.setHorarioini(object.getString("horarioini"));
+                h.setLatitude(Double.parseDouble(object.getString("latitude")));
+                h.setLongitude(Double.parseDouble(object.getString("longitude")));
+                h.setSala(object.getString("sala"));
+
+                horarios.add(h);
+            }
+            //Toast.makeText(mContext, "Dados salvo com sucesso.", Toast.LENGTH_SHORT).show();
+            return "Quantidade de horários: " + horarios.size();
         } catch (Exception e) {
             Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
+            return e.toString();
         }
     }
 
@@ -104,7 +131,7 @@ public class WebAppInterface {
 
     @JavascriptInterface
     public String getFilho() {
-        String result = null;
+        String result = "";
         try {
             SharedPreferences sharedPreferences = mContext.getSharedPreferences("ARRAIA", Context.MODE_PRIVATE);
             result = sharedPreferences.getString("FILHO", "");
