@@ -23,10 +23,12 @@ and open the template in the editor.
             function getHorario() {
                 var filho = JSON.parse(Android.getFilho());
                 var table = document.getElementById("horario");
-                for (i in filho.horario) {
-                    var row = table.insertRow(i);
-                    var cell1 = row.insertCell(filho.horario[i]);
-                    cell1.innerHTML = filho.horario[i].horarioini + "-" + filho.horario[i].horariofin + " - Escola: " + filho.horario[i].escola + " - Sala: " + filho.horario[i].sala;
+                if (table.rows.length == 0) {
+                    for (i in filho.horario) {
+                        var row = table.insertRow(i);
+                        var cell1 = row.insertCell(filho.horario[i]);
+                        cell1.innerHTML = filho.horario[i].horarioini + "-" + filho.horario[i].horariofin + " - Escola: " + filho.horario[i].escola + " - Sala: " + filho.horario[i].sala;
+                    }
                 }
             }
         </script>
