@@ -91,6 +91,7 @@ public class WebAppInterface {
             editor.putString("FILHO", filho);
             editor.commit();
             HorarioSQlite qlite = new HorarioSQlite(mContext);
+
             List<Horario> horarios = new ArrayList<Horario>();
             JSONObject jsonObject = new JSONObject(filho);
             String sObject = String.valueOf(jsonObject.get("horario"));
@@ -114,6 +115,7 @@ public class WebAppInterface {
 
                 qlite.save(h);
             }
+
             //Toast.makeText(mContext, "Dados salvo com sucesso.", Toast.LENGTH_SHORT).show();
             return "Quantidade de horários: " + qlite.countId(horarios.get(0));
         } catch (Exception e) {
