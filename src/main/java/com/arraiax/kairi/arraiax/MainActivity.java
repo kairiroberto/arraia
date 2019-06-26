@@ -1,8 +1,10 @@
 package com.arraiax.kairi.arraiax;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -33,11 +35,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btWebUsuario.setOnClickListener(this);
         btWebFilho = (Button) findViewById(R.id.btWebFilho);
         btWebFilho.setOnClickListener(this);
-        //
+
     }
 
     @Override
     public void onClick(View v) {
+        try {
+            Intent intent = new Intent();
+            intent.setAction("com.arraiax.kairi.arraiax.HORARIO");
+            sendBroadcast(intent);
+        } catch (Exception e) {
+            Log.e("SERVRJ", e.toString());
+        }
         int id = v.getId();
         if (id == R.id.btWebUsuario) {
             startActivity(new Intent(this, WebUsuarioActivity.class));

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
@@ -90,8 +91,8 @@ public class WebAppInterface {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("FILHO", filho);
             editor.commit();
-            HorarioSQlite qlite = new HorarioSQlite(mContext);
 
+            HorarioSQlite qlite = new HorarioSQlite(mContext);
             List<Horario> horarios = new ArrayList<Horario>();
             JSONObject jsonObject = new JSONObject(filho);
             String sObject = String.valueOf(jsonObject.get("horario"));
@@ -110,17 +111,25 @@ public class WebAppInterface {
                 h.setLatitude(Double.parseDouble(object.getString("latitude")));
                 h.setLongitude(Double.parseDouble(object.getString("longitude")));
                 h.setSala(object.getString("sala"));
-
                 horarios.add(h);
 
                 qlite.save(h);
             }
-
             //Toast.makeText(mContext, "Dados salvo com sucesso.", Toast.LENGTH_SHORT).show();
+            iniciarServico();
             return "Quantidade de horários: " + qlite.countId(horarios.get(0));
         } catch (Exception e) {
             Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
             return e.toString();
+        }
+    }
+
+    private void iniciarServico() {
+        try {
+            //Intent i = new Intent(mContext, HorarioReceiver.class);
+            //mContext.startService(i);
+        } catch (Exception e) {
+            Log.i("servico", "ERRO" + e);
         }
     }
 
