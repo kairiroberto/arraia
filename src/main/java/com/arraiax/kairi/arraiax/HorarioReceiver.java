@@ -22,12 +22,7 @@ public class HorarioReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
-        //throw new UnsupportedOperationException("Not yet implemented");
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED") || intent.getAction().equals("com.arraiax.kairi.arraiax.HORARIO")) {
-            // Set the alarm here.
-            // Hopefully your alarm will have a lower frequency than this!
             alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
             Intent intent1 = new Intent(context, HorarioService.class);
             alarmIntent = PendingIntent.getService (context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -40,7 +35,7 @@ public class HorarioReceiver extends BroadcastReceiver {
             alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                     intervalo, alarmIntent);
         }
-        Log.i("SERVRJ", "RECEIVER INICIADO");
+        Log.d(TAG, "RECEIVER INICIADO");
         final PendingResult pendingResult = goAsync();
         Task asyncTask = new Task(pendingResult, intent);
         asyncTask.execute();
@@ -69,7 +64,6 @@ public class HorarioReceiver extends BroadcastReceiver {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            // Must call finish() so the BroadcastReceiver can be recycled.
             pendingResult.finish();
         }
     }

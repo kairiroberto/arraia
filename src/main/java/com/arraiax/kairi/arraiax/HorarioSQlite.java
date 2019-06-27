@@ -53,7 +53,8 @@ public class HorarioSQlite extends SQLiteOpenHelper {
             values.put("latitude", horario.getLatitude());
             values.put("longitude", horario.getLongitude());
             values.put("sala", horario.getSala());
-            if (countId(horario) == 0) {
+            if (true) {
+                db.delete(TABLE, null, null);
                 db.insert(TABLE, "", values);
                 Log.i(TAG, "insert ok");
                 Log.i(TAG, "" + findAll().size());
